@@ -1,4 +1,6 @@
 from database import db_connection
+import chess
+import re
 
 
 class MoveStat:
@@ -14,19 +16,54 @@ class MoveStat:
 
 def get_position_key_from_fen(fen):
     parts = fen.split(" ")
-
     return " ".join(parts[:4])
+
+
+def validate_moves_with_regex(moves_text):
+    moves_text = moves_text.strip()
+
+    if moves_text == "":
+        return True
+
+    move_pattern = r"^(O-O-O|O-O|[KQRBN]?[a-h]?[1-8]?x?[a-h][1-8](=[QRBN])?[+#]?)$"
+
+    moves = moves_text.split()
+
+    for move in moves:
+        if not re.match(move_pattern, move):
+            return False
+
+    return True
+
+
+def get_position_key_from_moves(moves_text):
+    board = chess.Board()
+
+    moves_text = moves_text.strip()
+
+    if moves_text == "":
+        return get_position_key_from_fen(board.fen())
+
+    if not validate_moves_with_regex(moves_text):
+        raise ValueError("Input contains invalid chess notation")
+
+    moves = moves_text.split()
+
+    for move_text in moves:
+        board.push_san(move_text)
+
+    return get_position_key_from_fen(board.fen())
 
 
 def get_best_moves(position_key, my_rating, opponent_rating, my_color):
     conn = db_connection()
     cur = conn.cursor()
 
-    my_min = my_rating - 100
-    my_max = my_rating + 100
+    my_min = my_rating - 500
+    my_max = my_rating + 500
 
-    opponent_min = opponent_rating - 100
-    opponent_max = opponent_rating + 100
+    opponent_min = opponent_rating - 500
+    opponent_max = opponent_rating + 500
 
     if my_color == "white":
         query = """
@@ -107,6 +144,9 @@ def get_best_moves(position_key, my_rating, opponent_rating, my_color):
             opponent_min,
             opponent_max
         )
+
+    print("POSITION KEY:", position_key)
+    print("SQL VALUES:", values)
 
     cur.execute(query, values)
     rows = cur.fetchall()
