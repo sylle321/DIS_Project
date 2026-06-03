@@ -177,7 +177,9 @@ Run the app once. It automatically creates the database tables.
 ### Windows PowerShell
 
 ```powershell
-python app.py
+pip install flask
+pip install psycopg2-binary
+pip install chess
 ```
 
 ### macOS / Linux
