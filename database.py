@@ -7,6 +7,7 @@ host = os.environ.get("HOST", "127.0.0.1")
 port = os.environ.get("PGPORT", "port")
 dbname = os.environ.get("PGDATABASE", "chess")
 
+
 def db_connection():
     return psycopg2.connect(
         dbname=dbname,
@@ -58,3 +59,4 @@ def init_db():
     conn.commit()
     cur.close()
     conn.close()
+    
