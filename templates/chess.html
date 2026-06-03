@@ -9,16 +9,22 @@
 
     <form method="POST" action="/chess">
 
-        <label>FEN position:</label><br>
+        <label>Træk spillet indtil nu:</label><br>
         <input
             type="text"
-            name="fen"
-            value="{{ fen }}"
-            placeholder="Indsæt FEN her"
-            required
+            name="moves_text"
+            value="{{ moves_text }}"
+            placeholder="fx e4 e5 Nf3 Nc6"
             style="width: 700px;"
         >
         <br><br>
+
+        <p>
+            Eksempler:<br>
+            <strong>e4</strong> = positionen efter 1. e4, så er det sorts tur<br>
+            <strong>e4 e5</strong> = positionen efter 1. e4 e5, så er det hvids tur<br>
+            <strong>e4 e5 Nf3</strong> = positionen efter 1. e4 e5 2. Nf3, så er det sorts tur
+        </p>
 
         <label>Din rating:</label><br>
         <input
@@ -57,6 +63,10 @@
 
     <hr>
 
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
     {% if moves %}
         <h2>Resultater</h2>
 
@@ -84,8 +94,8 @@
             {% endfor %}
         </table>
 
-    {% elif fen %}
-        <p>Ingen resultater fundet for den position og rating.</p>
+    {% elif moves_text and not error %}
+        <p>Ingen resultater fundet for de træk og ratings.</p>
     {% endif %}
 
 </body>
