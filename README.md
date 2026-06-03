@@ -69,7 +69,7 @@ pip install flask psycopg2-binary chess
 
 ## Start PostgreSQL
 
-Before creating the database, make sure the PostgreSQL server is running.
+Before creating the database, the PostgreSQL server must be running.
 
 ### Windows
 
@@ -80,6 +80,8 @@ The service is usually called something like:
 ```text
 postgresql-x64-16
 ```
+
+If PostgreSQL was installed with pgAdmin, opening pgAdmin can also help confirm whether the server is running.
 
 ### macOS with Postgres.app
 
@@ -135,6 +137,15 @@ Create the database:
 ```powershell
 createdb -U postgres -h 127.0.0.1 -p $env:PGPORT chess
 ```
+If PowerShell says that `createdb` is not recognized, create the database manually in pgAdmin instead:
+
+1. Open pgAdmin.
+2. Right-click `Databases`.
+3. Click `Create` > `Database`.
+4. Name the database `chess`.
+5. Click `Save`.
+
+Then continue with the next step.
 
 If the database already exists, continue to the next step.
 
