@@ -226,7 +226,7 @@ Start the app again:
 ### Windows PowerShell
 
 ```powershell
-python app.py
+flash run --debug
 ```
 
 ### macOS / Linux
