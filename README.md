@@ -180,6 +180,7 @@ Run the app once. It automatically creates the database tables.
 pip install flask
 pip install psycopg2-binary
 pip install chess
+flask run --debug
 ```
 
 ### macOS / Linux
