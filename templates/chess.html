@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+    <title>Chess Statistics</title>
+</head>
+
+<body>
+    <h1>Find bedste historiske skaktræk</h1>
+
+    <form method="POST" action="/chess">
+
+        <label>FEN position:</label><br>
+        <input
+            type="text"
+            name="fen"
+            value="{{ fen }}"
+            placeholder="Indsæt FEN her"
+            required
+            style="width: 700px;"
+        >
+        <br><br>
+
+        <label>Din rating:</label><br>
+        <input
+            type="number"
+            name="my_rating"
+            value="{{ my_rating }}"
+            placeholder="fx 1450"
+            required
+        >
+        <br><br>
+
+        <label>Modstanderens rating:</label><br>
+        <input
+            type="number"
+            name="opponent_rating"
+            value="{{ opponent_rating }}"
+            placeholder="fx 1380"
+            required
+        >
+        <br><br>
+
+        <label>Din farve:</label><br>
+        <select name="my_color">
+            <option value="white" {% if my_color == "white" %}selected{% endif %}>
+                Hvid
+            </option>
+            <option value="black" {% if my_color == "black" %}selected{% endif %}>
+                Sort
+            </option>
+        </select>
+        <br><br>
+
+        <input type="submit" value="Find bedste træk">
+
+    </form>
+
+    <hr>
+
+    {% if moves %}
+        <h2>Resultater</h2>
+
+        <table border="1" cellpadding="8">
+            <tr>
+                <th>Træk</th>
+                <th>UCI</th>
+                <th>Antal spil</th>
+                <th>Sejre</th>
+                <th>Remis</th>
+                <th>Tab</th>
+                <th>Score</th>
+            </tr>
+
+            {% for move in moves %}
+                <tr>
+                    <td>{{ move.move_san }}</td>
+                    <td>{{ move.move_uci }}</td>
+                    <td>{{ move.games }}</td>
+                    <td>{{ move.wins }}</td>
+                    <td>{{ move.draws }}</td>
+                    <td>{{ move.losses }}</td>
+                    <td>{{ move.score }}%</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    {% elif fen %}
+        <p>Ingen resultater fundet for den position og rating.</p>
+    {% endif %}
+
+</body>
+</html>
