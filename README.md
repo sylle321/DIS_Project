@@ -48,6 +48,50 @@ Install dependencies:
 pip install flask psycopg2-binary chess
 ```
 
+## Start PostgreSQL
+
+Before creating the database, make sure the PostgreSQL server is running.
+
+### Windows
+
+Open **Services**, find the PostgreSQL service, and click **Start**.
+
+The service is usually called something like:
+
+```text
+postgresql-x64-16
+```
+
+### macOS with Postgres.app
+
+Open **Postgres.app** and make sure the server is running.
+
+### macOS with Homebrew
+
+```bash
+brew services start postgresql
+```
+
+If that does not work, try the versioned service name, for example:
+
+```bash
+brew services start postgresql@16
+```
+
+### Linux
+
+```bash
+sudo service postgresql start
+```
+
+or:
+
+```bash
+sudo systemctl start postgresql
+```
+
+---
+
 ## Database setup
 
 Create a PostgreSQL database called `chess`.
