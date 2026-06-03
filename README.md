@@ -181,6 +181,8 @@ pip install flask
 pip install psycopg2-binary
 pip install chess
 flask run --debug
+python -m pip install chess
+python -m pip install psycopg2-binary
 ```
 
 ### macOS / Linux
