@@ -2,7 +2,7 @@ import chess.pgn
 from database import db_connection
 
 
-PGN_FILE = "/data/sample_500.pgn"
+PGN_FILE = "data/sample_500.pgn"
 
 
 def position_key_from_board(board):
