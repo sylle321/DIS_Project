@@ -30,9 +30,28 @@ Create and activate a virtual environment.
 
 ### Windows PowerShell
 
+Create the virtual environment:
+
 ```powershell
 python -m venv .venv
-.venv\Scripts\activate
+```
+
+Activate it:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+If PowerShell blocks activation with an execution policy error, run:
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process
+```
+
+Then activate it again:
+
+```powershell
+.venv\Scripts\Activate.ps1
 ```
 
 ### macOS / Linux
@@ -89,8 +108,6 @@ or:
 ```bash
 sudo systemctl start postgresql
 ```
-
----
 
 ## Database setup
 
