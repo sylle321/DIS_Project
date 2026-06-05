@@ -1,6 +1,6 @@
 # Chess Statistics Web App
 
-📄 [README](README.md) · 🤖 [AI-deklaration](AI_deklaration.md) · 🗂️ [E/R-diagram](ER_DIAGRAM.md)
+📄 [README](README.md) · 🤖 [AI-deklaration](AI_deklaration.md) · 🗂️ [E/R-diagram](ER-diagram.png)
 
 
 A small Flask web app that uses a PostgreSQL database to recommend chess moves based on historical game statistics.
